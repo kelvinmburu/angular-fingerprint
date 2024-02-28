@@ -1,0 +1,18 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div>
+        <h3>User Signup</h3>
+    </div>
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" formControlName="password">
+    </div>
+    <button type="submit">Sign Up</button>
+    <div>
+        <p>Already have an account? <a [routerLink]="['/login']">Login</a></p>
+    </div>
+</form>
+  <div *ngIf="signupSuccess" class="alert alert-success">Signup successful!</div>
