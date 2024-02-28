@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router'
-
+import { Router } from '@angular/router';
+import { FingerprintjsProAngularService } from '@fingerprintjs/fingerprintjs-pro-angular';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup = new FormGroup({});
   signupSuccess = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private fingerprintService: FingerprintjsProAngularService) {}
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -22,20 +22,28 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     const username = this.signupForm.value.username;
     const password = this.signupForm.value.password;
-    
-
-    this.authService.signup(username, password).subscribe(
-      () => {
-        this.signupSuccess = true;
-        this.router.navigate(['/login']);
-      },
-      error => {
-        // ... error handling ...  
-      }
-  );
+  
+    try {
+      // Await the promise returned by getVisitorData()
+      const visitorData = await this.fingerprintService.getVisitorData();
+  
+      console.log(`Fingerprint ID: ${visitorData.visitorId}`);
+      // You might need to adjust this call based on how your service expects to receive the fingerprint ID
+      this.authService.signup(username, password, visitorData.visitorId).subscribe(
+        () => {
+          this.signupSuccess = true;
+          this.router.navigate(['/login']);
+        },
+        error => {
+          // ... error handling ...  
+        }
+      );
+    } catch (error) {
+      // Handle error in obtaining the fingerprint ID
+      console.error('Error obtaining fingerprint data', error);
     }
-
+  }
 }

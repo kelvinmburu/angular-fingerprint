@@ -14,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signup(username: string, password: string) {
-    return this.http.post('http://localhost:3000/signup', { username, password }); 
+  signup(username: string, password: string, fingerprintId: string) {
+    return this.http.post('http://localhost:3000/signup', { username, password, fingerprintId }); 
   }
 
   login(username: string, password: string): Observable<boolean> {

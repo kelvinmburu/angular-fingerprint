@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FingerprintjsProAngularModule } from '@fingerprintjs/fingerprintjs-pro-angular';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,10 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    FingerprintjsProAngularModule.forRoot({
+      loadOptions: {
+        apiKey: environment.fingerprintjsApiKey}
+      }),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
