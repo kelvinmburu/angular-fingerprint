@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
     BrowserModule,
     FingerprintjsProAngularModule.forRoot({
       loadOptions: {
-        apiKey: environment.fingerprintjsApiKey}
+        apiKey: environment.fingerprintjsApiKey} //replace with your api key
       }),
     HttpClientModule,
     FormsModule,

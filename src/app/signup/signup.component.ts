@@ -31,7 +31,6 @@ export class SignupComponent implements OnInit {
       const visitorData = await this.fingerprintService.getVisitorData();
   
       console.log(`Fingerprint ID: ${visitorData.visitorId}`);
-      // You might need to adjust this call based on how your service expects to receive the fingerprint ID
       this.authService.signup(username, password, visitorData.visitorId).subscribe(
         () => {
           this.signupSuccess = true;
