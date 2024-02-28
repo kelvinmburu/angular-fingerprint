@@ -13,7 +13,7 @@ const db = new sqlite3.Database('./users.db', (err) => {
   console.log('Connected to the users database.');
 });
 
-// Create users table if it doesn't exist
+// Create users table
 db.run(`CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           username TEXT UNIQUE,
@@ -21,7 +21,7 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
         )`);
 
 app.use(cors()); // Enable CORS
-app.use(express.json()); // For parsing JSON request bodies
+app.use(express.json()); // Parse JSON request bodies
 
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body;
