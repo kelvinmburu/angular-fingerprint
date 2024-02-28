@@ -13,7 +13,8 @@ const db = new sqlite3.Database('./users.db', (err) => {
   console.log('Connected to the users database.');
 });
 
-// Create users table
+// So, for this section, of course you'll have to use database migration for a production-ready app; or any
+// app that you want to deploy. This is for demo purposes only. ;-)
 db.run(`CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           username TEXT UNIQUE,
